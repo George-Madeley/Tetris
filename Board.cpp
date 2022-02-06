@@ -1,5 +1,22 @@
 #include "Board.h"
 
+
+/*
+==================
+Init
+==================
+*/
+Board::Board (Pieces *pPieces, int pScreenHeight) {
+	// Get the screen height
+	mScreenHeight = pScreenHeight;
+
+	// Get the pointer to the pieces class
+	mPieces = pPieces;
+
+	//Init the board blocks with free positions
+	InitBoard();
+}
+
 /*
 ======================================
 Init the board blocks with free positions

@@ -3,14 +3,14 @@
 /* Desc: Class for handling inpung & drawing, it uses SDL for the rendering. Change the methods of this class
 /*       in order to use a different renderer
 /*
-/* gametuto.com - Javier López López (javilop.com)
+/* gametuto.com - Javier Lï¿½pez Lï¿½pez (javilop.com)
 /*
 /*****************************************************************************************
 /*
 /* Creative Commons - Attribution 3.0 Unported
 /* You are free:
-/*	to Share — to copy, distribute and transmit the work
-/*	to Remix — to adapt the work
+/*	to Share ï¿½ to copy, distribute and transmit the work
+/*	to Remix ï¿½ to adapt the work
 /*
 /* Under the following conditions:
 /* Attribution. You must attribute the work in the manner specified by the author or licensor 
@@ -27,7 +27,7 @@
 #include "SDL/include/SDL.h"							
 #include "SDL/SDL_GfxPrimitives/SDL_gfxPrimitives.h"
 #else
-#include <SDL/SDL.h>									
+#include <SDL/include/SDL.h>									
 #include "SDL/SDL_GfxPrimitives/sdl_gfxprimitives.h"	
 #endif
 #pragma comment (lib, "SDL/lib/SDL.lib")

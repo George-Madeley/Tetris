@@ -1,5 +1,26 @@
+// ------ Includes -----
+#ifndef LINUX
+#include <windows.h>
+#endif
 #include "Game.h"
-#include <stdlib.h>
+
+/* 
+======================================									
+Init
+====================================== 
+*/
+Game::Game(Board *pBoard, Pieces *pPieces, IO *pIO, int pScreenHeight) 
+{
+	mScreenHeight = pScreenHeight;
+
+	// Get the pointer to the Board and Pieces classes
+	mBoard = pBoard;
+	mPieces = pPieces;
+	mIO = pIO;
+
+	// Game initialization
+	InitGame ();
+}
 
 /*
 ======================================

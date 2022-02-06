@@ -19,7 +19,7 @@
 
 class Game {
     public:
-        Game(Board *pBoard, Pieces *pPieces, io *pIO, int pScreenHeight);
+        Game(Board *pBoard, Pieces *pPieces, IO *pIO, int pScreenHeight);
 
         void DrawScene();
         void CreateNewPiece();

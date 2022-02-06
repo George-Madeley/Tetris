@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "IO.h"
 #ifndef LINUX
 #include <windows.h>
 #endif
@@ -8,7 +9,7 @@
 Main
 ==================
 */
-int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
+int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     // —– Vars —–
 
     // Class for drawing staff, it uses SDL for the rendering. Change the methods of this class
@@ -77,23 +78,23 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 break;
             }
         }
-        // —– Vertical movement —–
-        unsigned long mTime2 = SDL_GetTicks();
-
-        if ((mTime2 - mTime1) > WAIT_TIME) {
-            if (mBoard.IsPossibleMovement (mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation)) {
-                mGame.mPosY++;
-            } else {
-                mBoard.StorePiece (mGame.mPosX, mGame.mPosY, mGame.mPiece, mGame.mRotation);
-                mBoard.DeletePossibleLines ();
-                if (mBoard.IsGameOver()) {
-                    mIO.Getkey();
-                    exit(0);
-                }
-                mGame.CreateNewPiece();
-            }
-            mTime1 = SDL_GetTicks();
-        }
-        return 0;
     }
+    // —– Vertical movement —–
+    unsigned long mTime2 = SDL_GetTicks();
+
+    if ((mTime2 - mTime1) > WAIT_TIME) {
+        if (mBoard.IsPossibleMovement (mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation)) {
+            mGame.mPosY++;
+        } else {
+            mBoard.StorePiece (mGame.mPosX, mGame.mPosY, mGame.mPiece, mGame.mRotation);
+            mBoard.DeletePossibleLines ();
+            if (mBoard.IsGameOver()) {
+                mIO.Getkey();
+                exit(0);
+            }
+            mGame.CreateNewPiece();
+        }
+        mTime1 = SDL_GetTicks();
+    }
+    return 0;
 }
