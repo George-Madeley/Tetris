@@ -1,5 +1,7 @@
 from random import Random
 from numpy import random
+import Pieces
+import Board
 
 
 class Game:
