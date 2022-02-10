@@ -1,39 +1,37 @@
-from random import Random
-from numpy import random
-import Pieces
-import Board
+import random
+from Pieces import Pieces
+from Board import BOARD_HEIGHT, PIECE_BLOCKS, Board, BOARD_WIDTH
+import os
 
 
 class Game:
-    def __init__(self, pBoard, pPieces, pScreenHeight):
-        self.mScreenHeight = pScreenHeight
-        self.mBoard = pBoard
-        self.mPieces = pPieces
+    def __init__(self, pBoard, pPieces):
+        self.__mBoard = pBoard
+        self.__mPieces = pPieces
 
-        self.mPiece = random.randint(6)
-        self.mRotation = random.randint(3)
-        self.mPosX = (BOARD_WIDTH / 2) + self.mPieces.GetXInitialPosition(self.mPiece, self.mRotation)
-        self.mPosY = self.mPieces.GetYInitialPosition(self.mPiece, self.mRotation)
+        self.mPiece = 0 #random.randint(0, 6)
+        self.mRotation = random.randint(0, 3)
+        self.mPosX = int((BOARD_WIDTH / 2) + self.__mPieces.GetXInitialPosition(self.mPiece, self.mRotation))
+        self.mPosY = self.__mPieces.GetYInitialPosition(self.mPiece, self.mRotation)
 
-        self.mNextPiece = random.randint(6)
-        self.mNextRotation = random.randit(3)
-        self.mNextPosX = BOARD_WIDTH + 5
-        self.mNextPosY = 5
+        self.__mNextPiece = 0 #random.randint(0, 6)
+        self.__mNextRotation = random.randint(0, 3)
 
     def CreateNewPiece(self):
         """
         Create a random piece
         """
+        print("New Piece")
         # The new piece
-        self.mPiece = self.mNextPiece
-        self.mRotation = self.mNextRotation
-        self.mPosX = (BOARD_WIDTH / 2) + self.mPieces.GetXInitialPosition(self.mPiece, self.mRotation)
-        self.mPosY = self.mPieces.GetYInitialPosition(self.mPiece, self.mRotation)
+        self.mPiece = self.__mNextPiece
+        self.mRotation = self.__mNextRotation
+        self.mPosX = int((BOARD_WIDTH / 2) + self.__mPieces.GetXInitialPosition(self.mPiece, self.mRotation))
+        self.mPosY = self.__mPieces.GetYInitialPosition(self.mPiece, self.mRotation)
         # random next piece
-        self.mNextPiece = random.randint(6)
-        self.mNextRotation = random.randint(3)
+        self.__mNextPiece = 0 #random.randint(0, 6)
+        self.__mNextRotation = random.randint(0, 3)
 
-    def DrawPiece(self, pX, pY, pPiece, pRotation) -> None:
+    def __DrawPiece(self, pX, pY, pPiece, pRotation) -> None:
         """
         Draw piece
 
@@ -43,15 +41,11 @@ class Game:
         - int pPiece: Piece to draw
         - int pRotation: 1 of the 4 possible rotations
         """
-        pass
-
-    def DrawBoard(self) -> None:
-        """
-        Draw board
-
-        Draw the two lines that delimit the board
-        """
-        pass
+        for i in range(PIECE_BLOCKS):
+            for j in range(PIECE_BLOCKS):
+                blockType = self.__mPieces.GetBlockType(pPiece, pRotation, j, i)
+                if blockType != 0:
+                    self.__mBoard[j][i] = blockType
 
     def DrawScene(self):
         """
@@ -59,10 +53,28 @@ class Game:
 
         Draw all the objects of the scene
         """
-        # Draw the delimitation lines and blocks stored in the board
-        self.DrawBoard()
-        # Draw the playing piece
-        self.DrawPiece(self.mPosX, self.mPosY, self.mPiece, self.mRotation)
-        # Draw the next piece
-        self.DrawPiece(self.mNextPosX, self.mNextPosY, self.mNextPiece, self.mNextRotation)
+        # Clear the terminal
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        board = self.__mBoard.GetBoard()
+        for j1 in range(len(board)):
+            for i1 in range(BOARD_WIDTH):
+                if j1 >= self.mPosY and j1 < self.mPosY + PIECE_BLOCKS and i1 >= self.mPosX and i1 < self.mPosX + PIECE_BLOCKS:
+                    blockXCoord = i1 - self.mPosX
+                    blockYCoord = j1 - self.mPosY
+                    blockPiece = self.__mPieces.GetBlockType(self.mPiece, self.mRotation, blockYCoord, blockXCoord)
+                    if blockPiece != 0:
+                        print(str(blockPiece), end="\t")
+                        pass
+                    else:
+                        if board[j1][i1] == 0:
+                            print("-", end="\t")
+                        else:
+                            print("X", end="\t")
+                else:
+                    if board[j1][i1] == 0:
+                        print("-", end="\t")
+                    else:
+                        print("X", end="\t")
+            print("\n")
     
