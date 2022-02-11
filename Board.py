@@ -47,7 +47,7 @@ class Board:
 
         Returns true or false
         """
-        # If the first line has blocks, then, game over
+        # If the first line has blocks, then, game over 
         for i in range(BOARD_WIDTH):
             if self.__mBoard[0][i] == 1:
                 return True
@@ -112,15 +112,12 @@ class Board:
                 # Check if the piece is outside the limits of the board
                 if i1 < 0 or i1 > BOARD_WIDTH - 1 or j1 > BOARD_HEIGHT - 1:
                     if self.__mPieces.GetBlockType(pPiece, pRotation, j2, i2) != 0:
-                        print("False 1")
                         return False
                 # Check if the piece have collisioned with a block already stored in the map
                 if j1 >= 0:
                     if self.__mPieces.GetBlockType(pPiece, pRotation, j2, i2) != 0 and not self.IsFreeBlock(i1, j1):
-                        print("False 2")
                         return False
                 j2 += 1
             i2 += 1
         # No collision
-        print("True")
         return True

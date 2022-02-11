@@ -9,26 +9,25 @@ class Game:
         self.__mBoard = pBoard
         self.__mPieces = pPieces
 
-        self.mPiece = 0 #random.randint(0, 6)
+        self.mPiece = random.randint(0, 6)
         self.mRotation = random.randint(0, 3)
         self.mPosX = int((BOARD_WIDTH / 2) + self.__mPieces.GetXInitialPosition(self.mPiece, self.mRotation))
         self.mPosY = self.__mPieces.GetYInitialPosition(self.mPiece, self.mRotation)
 
-        self.__mNextPiece = 0 #random.randint(0, 6)
+        self.__mNextPiece = random.randint(0, 6)
         self.__mNextRotation = random.randint(0, 3)
 
     def CreateNewPiece(self):
         """
         Create a random piece
         """
-        print("New Piece")
         # The new piece
         self.mPiece = self.__mNextPiece
         self.mRotation = self.__mNextRotation
         self.mPosX = int((BOARD_WIDTH / 2) + self.__mPieces.GetXInitialPosition(self.mPiece, self.mRotation))
         self.mPosY = self.__mPieces.GetYInitialPosition(self.mPiece, self.mRotation)
         # random next piece
-        self.__mNextPiece = 0 #random.randint(0, 6)
+        self.__mNextPiece = random.randint(0, 6)
         self.__mNextRotation = random.randint(0, 3)
 
     def __DrawPiece(self, pX, pY, pPiece, pRotation) -> None:
@@ -64,17 +63,17 @@ class Game:
                     blockYCoord = j1 - self.mPosY
                     blockPiece = self.__mPieces.GetBlockType(self.mPiece, self.mRotation, blockYCoord, blockXCoord)
                     if blockPiece != 0:
-                        print(str(blockPiece), end="\t")
+                        print(str(blockPiece), end="")
                         pass
                     else:
                         if board[j1][i1] == 0:
-                            print("-", end="\t")
+                            print("-", end="")
                         else:
-                            print("X", end="\t")
+                            print("X", end="")
                 else:
                     if board[j1][i1] == 0:
-                        print("-", end="\t")
+                        print("-", end="")
                     else:
-                        print("X", end="\t")
-            print("\n")
+                        print("X", end="")
+            print("\n", end="")
     
